@@ -1,0 +1,8 @@
+Sfx2Sirsi 3.0.
+
+In trying to refactor and clean up (add tests) to sfx2sirsi 2, it became
+clear that much of the logic is no longer necessary (if it ever was).
+All sfx2sirsi now does is produce an output file containing object id,
+issn, eissn, and open url, with a correct summary holdings statement.
+Starting backwards from the required output, I'm rewriting/redesigning
+sfx2sirsi to not do too much.
