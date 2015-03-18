@@ -7,7 +7,6 @@ class TestChangedRecord < Minitest::Test
   def setup
     records = Nokogiri::XML(File.open("data/sfx_input.xml").read)
     @split_records =  records.xpath("//xmlns:record", :xmlns=>"http://www.loc.gov/MARC21/slim")
-
     @first_record = @split_records.first
     @second_record = @split_records.last
     @hashes = File.open("data/test_hashes.txt").read.lines.map(&:chomp)
