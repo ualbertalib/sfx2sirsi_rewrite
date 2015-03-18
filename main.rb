@@ -6,16 +6,17 @@ include HashModule
 
 input = Nokogiri::XML(File.open("data/sfxdata.xml").read)
 output = []
-hashes = []
+hashes = {}
 input.xpath("//xmlns:record", :xmlns=>"http://www.loc.gov/MARC21/slim").each do |input|
-  puts "sfx2sirsi: ."
-  output << Sfx2Sirsi.new(input).process
-  hashes << HashModule.create_hash(input)
+  processed, id = Sfx2Sirsi.new(input).process
+  output << processed
+  hashes[id] = HashModule.create_hash(input)
+  puts "sfx2sirsi: #{id}"
 end
 File.open("data/outfile.txt", "w"){ |of|
   output.each{ |o| of.puts o }
 }
 
 File.open("data/hashes.txt", "w"){ |of|
-  hashes.each { |o| of.puts o }
+  of.write hashes
 }

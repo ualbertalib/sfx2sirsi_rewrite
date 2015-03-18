@@ -12,11 +12,16 @@ class TestSfx2Sirsi < Minitest::Test
   def test_sfx2sirsi
     assert_instance_of Array, @output
     output = []
+    ids = []
     @input.xpath("//xmlns:record", :xmlns=>"http://www.loc.gov/MARC21/slim").each do |input|
-      output << Sfx2Sirsi.new(input).process
+      processed, id = Sfx2Sirsi.new(input).process
+      output << processed
+      ids << id
     end
     assert_equal output.first, @output.first
     assert_equal output.last, @output.last
+    assert_equal ids.first, "55555"
+    assert_equal ids.last, "55556"
   end
 
 end

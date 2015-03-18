@@ -7,7 +7,8 @@ class Sfx2Sirsi
   end
 
   def process
-    "#{sfx_object_id}|#{print_issn}|#{electronic_issn}|http://resolver.library.ualberta.ca/resolver?ctx_enc=info%3Aofi%2Fenc%3AUTF-8&ctx_ver=Z39.88-2004&rfr_id=info%3Asid%2Fualberta.ca%3Aopac&rft.genre=journal&rft.object_id=#{sfx_object_id}&rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Ajournal&url_ctx_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Actx&url_ver=Z39.88-2004|#{summary_holdings}|false|restricted"
+    processed_record = "#{sfx_object_id}|#{print_issn}|#{electronic_issn}|http://resolver.library.ualberta.ca/resolver?ctx_enc=info%3Aofi%2Fenc%3AUTF-8&ctx_ver=Z39.88-2004&rfr_id=info%3Asid%2Fualberta.ca%3Aopac&rft.genre=journal&rft.object_id=#{sfx_object_id}&rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Ajournal&url_ctx_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Actx&url_ver=Z39.88-2004|#{summary_holdings}|false|restricted"
+    return processed_record, sfx_object_id
   end
 
   def sfx_object_id
