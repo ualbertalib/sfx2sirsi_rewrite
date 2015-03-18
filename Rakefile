@@ -22,7 +22,7 @@ end
 
 desc "Run full update."
 task :full_update => :setup do
-  File.delete("data/hashes.txt")
+  File.delete("data/hashes.txt") if File.exists? "data/hashes.txt"
   Rake::Task["partial_update"].execute
 end
 
@@ -36,13 +36,12 @@ end
 
 def write_data
   File.open("data/outfile.txt", "w"){ |of|
-    output.each{ |o| of.puts o }
+    @output.each{ |o| of.puts o }
   }
 end
 
 def write_hashes
   File.open("data/hashes.txt", "w"){ |of|
-    of.write hashes
+    of.write @hashes
   }
 end
-
