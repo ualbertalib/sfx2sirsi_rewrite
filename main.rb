@@ -7,10 +7,11 @@ include HashModule
 input = Nokogiri::XML(File.open("data/sfxdata.xml").read)
 output = []
 hashes = {}
+previous_hashes = eval(File.open("data/hashes.txt").read)
 input.xpath("//xmlns:record", :xmlns=>"http://www.loc.gov/MARC21/slim").each do |input|
   processed, id = Sfx2Sirsi.new(input).process
-  output << processed
   hashes[id] = HashModule.create_hash(input)
+  output << processed unless hashes[id] == previous_hashes[id]
   puts "sfx2sirsi: #{id}"
 end
 File.open("data/outfile.txt", "w"){ |of|
