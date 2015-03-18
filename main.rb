@@ -7,7 +7,10 @@ include HashModule
 input = Nokogiri::XML(File.open("data/sfxdata.xml").read)
 output = []
 hashes = {}
-previous_hashes = eval(File.open("data/hashes.txt").read)
+
+# in order to do a full update, simply delete the data/hashes.txt file
+previous_hashes = {}
+previous_hashes = eval(File.open("data/hashes.txt").read) if File.exists? ("data/hashes.txt")
 input.xpath("//xmlns:record", :xmlns=>"http://www.loc.gov/MARC21/slim").each do |input|
   processed, id = Sfx2Sirsi.new(input).process
   hashes[id] = HashModule.create_hash(input)
